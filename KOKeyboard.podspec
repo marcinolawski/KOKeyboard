@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.author       = "Adam Horacek"
   s.source       = { :git => "https://github.com/4ntoine/KOKeyboard.git" }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '7.0'
   s.requires_arc = true
 
   s.source_files = 'KOKeyboard/*.{h,m}'
