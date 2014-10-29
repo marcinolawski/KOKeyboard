@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		23CC2BFF18792BD700BBC434 /* UIColorExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC2BFC18792BD700BBC434 /* UIColorExtensions.m */; };
 		23CC2C0018792BD700BBC434 /* UIImageExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC2BFE18792BD700BBC434 /* UIImageExtensions.m */; };
+		561DCA631A00D89200B5B661 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 561DCA611A00D89200B5B661 /* InfoPlist.strings */; };
+		561DCA651A00D8B900B5B661 /* KOKeyboard-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 561DCA641A00D8B900B5B661 /* KOKeyboard-Info.plist */; };
+		561DCA661A00D90E00B5B661 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 665C983315CC2C91001B6908 /* main.m */; };
 		665C982815CC2C91001B6908 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665C982715CC2C91001B6908 /* UIKit.framework */; };
 		665C982A15CC2C91001B6908 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665C982915CC2C91001B6908 /* Foundation.framework */; };
 		665C982C15CC2C91001B6908 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665C982B15CC2C91001B6908 /* CoreGraphics.framework */; };
-		665C983215CC2C91001B6908 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 665C983015CC2C91001B6908 /* InfoPlist.strings */; };
-		665C983415CC2C91001B6908 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 665C983315CC2C91001B6908 /* main.m */; };
 		665C983815CC2C91001B6908 /* KOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 665C983715CC2C91001B6908 /* KOAppDelegate.m */; };
 		665C983B15CC2C91001B6908 /* KOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 665C983A15CC2C91001B6908 /* KOViewController.m */; };
 		665C986015CC2EC5001B6908 /* KOKeyboardRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 665C985115CC2EC5001B6908 /* KOKeyboardRow.m */; };
@@ -25,18 +26,18 @@
 		23CC2BFC18792BD700BBC434 /* UIColorExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColorExtensions.m; sourceTree = "<group>"; };
 		23CC2BFD18792BD700BBC434 /* UIImageExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageExtensions.h; sourceTree = "<group>"; };
 		23CC2BFE18792BD700BBC434 /* UIImageExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageExtensions.m; sourceTree = "<group>"; };
+		561DCA621A00D89200B5B661 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = KOKeyboardDemo/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		561DCA641A00D8B900B5B661 /* KOKeyboard-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "KOKeyboard-Info.plist"; path = "KOKeyboardDemo/KOKeyboard-Info.plist"; sourceTree = SOURCE_ROOT; };
 		665C982315CC2C91001B6908 /* KOKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KOKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		665C982715CC2C91001B6908 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		665C982915CC2C91001B6908 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		665C982B15CC2C91001B6908 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		665C982F15CC2C91001B6908 /* KOKeyboard-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KOKeyboard-Info.plist"; sourceTree = "<group>"; };
-		665C983115CC2C91001B6908 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		665C983315CC2C91001B6908 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		665C983315CC2C91001B6908 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../KOKeyboardDemo/main.m; sourceTree = "<group>"; };
 		665C983515CC2C91001B6908 /* KOKeyboard-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KOKeyboard-Prefix.pch"; sourceTree = "<group>"; };
-		665C983615CC2C91001B6908 /* KOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KOAppDelegate.h; sourceTree = "<group>"; };
-		665C983715CC2C91001B6908 /* KOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KOAppDelegate.m; sourceTree = "<group>"; };
-		665C983915CC2C91001B6908 /* KOViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KOViewController.h; sourceTree = "<group>"; };
-		665C983A15CC2C91001B6908 /* KOViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KOViewController.m; sourceTree = "<group>"; };
+		665C983615CC2C91001B6908 /* KOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KOAppDelegate.h; path = ../KOKeyboardDemo/KOAppDelegate.h; sourceTree = "<group>"; };
+		665C983715CC2C91001B6908 /* KOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = KOAppDelegate.m; path = ../KOKeyboardDemo/KOAppDelegate.m; sourceTree = "<group>"; };
+		665C983915CC2C91001B6908 /* KOViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KOViewController.h; path = ../KOKeyboardDemo/KOViewController.h; sourceTree = "<group>"; };
+		665C983A15CC2C91001B6908 /* KOViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = KOViewController.m; path = ../KOKeyboardDemo/KOViewController.m; sourceTree = "<group>"; };
 		665C985015CC2EC5001B6908 /* KOKeyboardRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KOKeyboardRow.h; sourceTree = "<group>"; };
 		665C985115CC2EC5001B6908 /* KOKeyboardRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KOKeyboardRow.m; sourceTree = "<group>"; };
 		665C985215CC2EC5001B6908 /* KOSwipeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KOSwipeButton.h; sourceTree = "<group>"; };
@@ -111,9 +112,9 @@
 		665C982E15CC2C91001B6908 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				561DCA641A00D8B900B5B661 /* KOKeyboard-Info.plist */,
+				561DCA611A00D89200B5B661 /* InfoPlist.strings */,
 				665C986215CC2ED3001B6908 /* Assets */,
-				665C982F15CC2C91001B6908 /* KOKeyboard-Info.plist */,
-				665C983015CC2C91001B6908 /* InfoPlist.strings */,
 				665C983315CC2C91001B6908 /* main.m */,
 				665C983515CC2C91001B6908 /* KOKeyboard-Prefix.pch */,
 			);
@@ -191,7 +192,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				665C983215CC2C91001B6908 /* InfoPlist.strings in Resources */,
+				561DCA631A00D89200B5B661 /* InfoPlist.strings in Resources */,
+				561DCA651A00D8B900B5B661 /* KOKeyboard-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,12 +204,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				665C983415CC2C91001B6908 /* main.m in Sources */,
 				665C983815CC2C91001B6908 /* KOAppDelegate.m in Sources */,
 				665C983B15CC2C91001B6908 /* KOViewController.m in Sources */,
 				23CC2BFF18792BD700BBC434 /* UIColorExtensions.m in Sources */,
 				665C986015CC2EC5001B6908 /* KOKeyboardRow.m in Sources */,
 				23CC2C0018792BD700BBC434 /* UIImageExtensions.m in Sources */,
+				561DCA661A00D90E00B5B661 /* main.m in Sources */,
 				665C986115CC2EC5001B6908 /* KOSwipeButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,10 +217,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		665C983015CC2C91001B6908 /* InfoPlist.strings */ = {
+		561DCA611A00D89200B5B661 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				665C983115CC2C91001B6908 /* en */,
+				561DCA621A00D89200B5B661 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -283,9 +285,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KOKeyboard/KOKeyboard-Prefix.pch";
-				INFOPLIST_FILE = "KOKeyboard/KOKeyboard-Info.plist";
+				INFOPLIST_FILE = "KOKeyboardDemo/KOKeyboard-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -296,9 +300,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KOKeyboard/KOKeyboard-Prefix.pch";
-				INFOPLIST_FILE = "KOKeyboard/KOKeyboard-Info.plist";
+				INFOPLIST_FILE = "KOKeyboardDemo/KOKeyboard-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
