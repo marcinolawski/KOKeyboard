@@ -37,6 +37,21 @@
 @interface KOSwipeButton : UIButton
 
 @property(nonatomic, weak) id delegate;
+@property(nonatomic, retain) NSMutableArray *labels;
+@property(nonatomic, assign) CGPoint touchBeginPoint;
+@property(nonatomic, retain) UILabel *selectedLabel;
+@property(nonatomic, retain) UIImageView *bgView;
+@property(nonatomic, retain) UIImageView *foregroundView;
+@property(nonatomic, assign) BOOL trackPoint;
+@property(nonatomic, assign) BOOL tabButton;
+@property(nonatomic, retain) NSDate *firstTapDate;
+@property(nonatomic, assign) BOOL selecting;
+@property(nonatomic, retain) UIImage *blueImage;
+@property(nonatomic, retain) UIImage *pressedImage;
+@property(nonatomic, retain) UIImage *blueFgImage;
+@property(nonatomic, retain) UIImage *pressedFgImage;
+@property(nonatomic, retain) NSString *tabString;
 
 - (void)setKeys:(NSString *)newKeys;
+
 @end

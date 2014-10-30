@@ -43,8 +43,17 @@
 @end
 
 @implementation KOKeyboardRow
+{
+    NSMutableArray *_buttons;
+}
 
 @synthesize textView, startLocation;
+
+- (void) setTabInsertString: (NSString*)string {
+    for (KOSwipeButton *eachButton in self.buttons) {
+        eachButton.tabString = string;
+    }
+}
 
 + (KOKeyboardRow *)applyToTextView:(UITextView *)t {
     int barHeight = 72;
@@ -64,6 +73,7 @@
     leftMargin = (barWidth - buttonWidth * buttonCount - buttonSpacing * (buttonCount - 1)) / 2;
 
     NSString *keys = @"TTTTT()\"[]{}'<>\\/$´`~^|€£◉◉◉◉◉-+=%*!?#@&_:;,.1203467589";
+    v.buttons = [[NSMutableArray alloc] init];
 
     for (int i = 0; i < buttonCount; i++) {
         KOSwipeButton *b = [[KOSwipeButton alloc] initWithFrame:CGRectMake(leftMargin + i * (buttonSpacing + buttonWidth), topMargin + (barHeight - buttonHeight) / 2, buttonWidth, buttonHeight)];
@@ -71,6 +81,7 @@
         b.delegate = v;
         b.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         [v addSubview:b];
+        [v.buttons addObject:b];
     }
 
     t.inputAccessoryView = v;

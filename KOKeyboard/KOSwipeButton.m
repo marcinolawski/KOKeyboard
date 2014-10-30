@@ -37,29 +37,9 @@
 #import "UIImageExtensions.h"
 #import "UIColorExtensions.h"
 
-@interface KOSwipeButton ()
-
-@property(nonatomic, retain) NSMutableArray *labels;
-@property(nonatomic, assign) CGPoint touchBeginPoint;
-@property(nonatomic, retain) UILabel *selectedLabel;
-@property(nonatomic, retain) UIImageView *bgView;
-@property(nonatomic, retain) UIImageView *foregroundView;
-@property(nonatomic, assign) BOOL trackPoint;
-@property(nonatomic, assign) BOOL tabButton;
-@property(nonatomic, retain) NSDate *firstTapDate;
-@property(nonatomic, assign) BOOL selecting;
-@property(nonatomic, retain) UIImage *blueImage;
-@property(nonatomic, retain) UIImage *pressedImage;
-@property(nonatomic, retain) UIImage *blueFgImage;
-@property(nonatomic, retain) UIImage *pressedFgImage;
-
-@end
-
 #define TIME_INTERVAL_FOR_DOUBLE_TAP 0.4
 
 @implementation KOSwipeButton
-
-@synthesize labels, touchBeginPoint, selectedLabel, delegate, bgView, trackPoint, tabButton, selecting, firstTapDate, blueImage, pressedImage, foregroundView, blueFgImage, pressedFgImage;
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
@@ -68,13 +48,13 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
 
-    bgView = [[UIImageView alloc] initWithFrame:self.bounds];
-    [bgView setImage:[UIImage imageWithUIColor:[UIColor whiteColor]]];
-    [bgView setHighlightedImage:[UIImage imageWithUIColor:[UIColor colorFromHexString:@"#CCCCCC"]]];
-    bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.bgView = [[UIImageView alloc] initWithFrame:self.bounds];
+    [self.bgView setImage:[UIImage imageWithUIColor:[UIColor whiteColor]]];
+    [self.bgView setHighlightedImage:[UIImage imageWithUIColor:[UIColor colorFromHexString:@"#CCCCCC"]]];
+    self.bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.layer setCornerRadius:6];
     [self.layer setMasksToBounds:YES];
-    [self addSubview:bgView];
+    [self addSubview:self.bgView];
 
 
     int labelWidth = 20;
@@ -85,6 +65,7 @@
     int bottomInset = 8;
 
     self.labels = [[NSMutableArray alloc] init];
+    self.tabString = @"    ";
 
     UIFont *f = [UIFont systemFontOfSize:15];
 
@@ -95,7 +76,7 @@
     [self addSubview:l];
     [l setHighlightedTextColor:[UIColor whiteColor]];
     l.backgroundColor = [UIColor clearColor];
-    [labels addObject:l];
+    [self.labels addObject:l];
 
     l = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - labelWidth - rightInset, topInset, labelWidth, labelHeight)];
     l.textAlignment = UITextAlignmentRight;
@@ -105,7 +86,7 @@
     [self addSubview:l];
     [l setHighlightedTextColor:[UIColor whiteColor]];
     l.backgroundColor = [UIColor clearColor];
-    [labels addObject:l];
+    [self.labels addObject:l];
 
     l = [[UILabel alloc] initWithFrame:CGRectIntegral(CGRectMake((self.frame.size.width - labelWidth - leftInset - rightInset) / 2 + leftInset, (self.frame.size.height - labelHeight - topInset - bottomInset) / 2 + topInset, labelWidth, labelHeight))];
     l.textAlignment = UITextAlignmentCenter;
@@ -115,7 +96,7 @@
     [self addSubview:l];
     [l setHighlightedTextColor:[UIColor whiteColor]];
     l.backgroundColor = [UIColor clearColor];
-    [labels addObject:l];
+    [self.labels addObject:l];
 
     l = [[UILabel alloc] initWithFrame:CGRectMake(leftInset, (self.frame.size.height - labelHeight - bottomInset), labelWidth, labelHeight)];
     l.textAlignment = UITextAlignmentLeft;
@@ -124,7 +105,7 @@
     [self addSubview:l];
     [l setHighlightedTextColor:[UIColor whiteColor]];
     l.backgroundColor = [UIColor clearColor];
-    [labels addObject:l];
+    [self.labels addObject:l];
 
     l = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - labelWidth - rightInset, (self.frame.size.height - labelHeight - bottomInset), labelWidth, labelHeight)];
     l.textAlignment = UITextAlignmentRight;
@@ -134,37 +115,37 @@
     [self addSubview:l];
     [l setHighlightedTextColor:[UIColor whiteColor]];
     l.backgroundColor = [UIColor clearColor];
-    [labels addObject:l];
+    [self.labels addObject:l];
 
-    firstTapDate = [[NSDate date] dateByAddingTimeInterval:-1];
+    self.firstTapDate = [[NSDate date] dateByAddingTimeInterval:-1];
 
     return self;
 }
 
 - (void)setKeys:(NSString *)newKeys {
     for (int i = 0; i < MIN(newKeys.length, 5); i++) {
-        [[labels objectAtIndex:i] setText:[newKeys substringWithRange:NSMakeRange(i, 1)]];
-        [[labels objectAtIndex:i] setAdjustsFontSizeToFitWidth:YES];
+        [[self.labels objectAtIndex:i] setText:[newKeys substringWithRange:NSMakeRange(i, 1)]];
+        [[self.labels objectAtIndex:i] setAdjustsFontSizeToFitWidth:YES];
 
         if ([[newKeys substringToIndex:1] isEqualToString:@"◉"] |
                 [[newKeys substringToIndex:1] isEqualToString:@"T"]) {
 
-            trackPoint = [[newKeys substringToIndex:1] isEqualToString:@"◉"];
-            tabButton = [[newKeys substringToIndex:1] isEqualToString:@"T"];
+            self.trackPoint = [[newKeys substringToIndex:1] isEqualToString:@"◉"];
+            self.tabButton = [[newKeys substringToIndex:1] isEqualToString:@"T"];
 
             if (i != 2)
-                [[labels objectAtIndex:i] setHidden:YES];
+                [[self.labels objectAtIndex:i] setHidden:YES];
             else {
-                [[labels objectAtIndex:i] setFont:[UIFont systemFontOfSize:20]];
-                if (trackPoint) {
-                    blueImage = [UIImage imageWithUIColor:[UIColor colorFromHexString:@"#336ccc"]];
-                    pressedImage = [UIImage imageWithUIColor:[UIColor colorFromHexString:@"#CCCCCC"]];
-                    [[labels objectAtIndex:i] setText:@"◉"];
-                    [[labels objectAtIndex:i] setFrame:self.bounds];
+                [[self.labels objectAtIndex:i] setFont:[UIFont systemFontOfSize:20]];
+                if (self.trackPoint) {
+                    self.blueImage = [UIImage imageWithUIColor:[UIColor colorFromHexString:@"#336ccc"]];
+                    self.pressedImage = [UIImage imageWithUIColor:[UIColor colorFromHexString:@"#CCCCCC"]];
+                    [[self.labels objectAtIndex:i] setText:@"◉"];
+                    [[self.labels objectAtIndex:i] setFrame:self.bounds];
 
                 } else {
-                    [[labels objectAtIndex:i] setText:@"→"];
-                    [[labels objectAtIndex:i] setFrame:self.bounds];
+                    [[self.labels objectAtIndex:i] setText:@"→"];
+                    [[self.labels objectAtIndex:i] setFrame:self.bounds];
                 }
             }
         }
@@ -172,38 +153,38 @@
 }
 
 - (void)selectLabel:(int)idx {
-    selectedLabel = nil;
+    self.selectedLabel = nil;
 
-    for (int i = 0; i < labels.count; i++) {
-        UILabel *l = [labels objectAtIndex:i];
+    for (int i = 0; i < self.labels.count; i++) {
+        UILabel *l = [self.labels objectAtIndex:i];
         l.highlighted = (idx == i);
 
         if (idx == i)
-            selectedLabel = l;
+            self.selectedLabel = l;
     }
 
-    bgView.highlighted = selectedLabel != nil;
-    foregroundView.highlighted = selectedLabel != nil;
+    self.bgView.highlighted = self.selectedLabel != nil;
+    self.foregroundView.highlighted = self.selectedLabel != nil;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [[UIDevice currentDevice] playInputClick];
     UITouch *t = [touches anyObject];
-    touchBeginPoint = [t locationInView:self];
+    self.touchBeginPoint = [t locationInView:self];
 
-    if (trackPoint) {
-        if (fabs([firstTapDate timeIntervalSinceNow]) < TIME_INTERVAL_FOR_DOUBLE_TAP) {
-            bgView.highlightedImage = blueImage;
-            foregroundView.highlightedImage = blueFgImage;
-            selecting = YES;
+    if (self.trackPoint) {
+        if (fabs([self.firstTapDate timeIntervalSinceNow]) < TIME_INTERVAL_FOR_DOUBLE_TAP) {
+            self.bgView.highlightedImage = self.blueImage;
+            self.foregroundView.highlightedImage = self.blueFgImage;
+            self.selecting = YES;
         } else {
-            bgView.highlightedImage = pressedImage;
-            foregroundView.highlightedImage = pressedFgImage;
-            selecting = NO;
+            self.bgView.highlightedImage = self.pressedImage;
+            self.foregroundView.highlightedImage = self.pressedFgImage;
+            self.selecting = NO;
         }
-        firstTapDate = [NSDate date];
+        self.firstTapDate = [NSDate date];
 
-        [delegate trackPointStarted];
+        [self.delegate trackPointStarted];
     }
 
     [self selectLabel:2];
@@ -213,18 +194,18 @@
     UITouch *t = [touches anyObject];
     CGPoint touchMovePoint = [t locationInView:self];
 
-    CGFloat xdiff = touchBeginPoint.x - touchMovePoint.x;
-    CGFloat ydiff = touchBeginPoint.y - touchMovePoint.y;
+    CGFloat xdiff = self.touchBeginPoint.x - touchMovePoint.x;
+    CGFloat ydiff = self.touchBeginPoint.y - touchMovePoint.y;
     CGFloat distance = sqrt(xdiff * xdiff + ydiff * ydiff);
 
-    if (trackPoint) {
-        [delegate trackPointMovedX:xdiff Y:ydiff selecting:selecting];
+    if (self.trackPoint) {
+        [self.delegate trackPointMovedX:xdiff Y:ydiff selecting:self.selecting];
         return;
     }
 
     if (distance > 250) {
         [self selectLabel:-1];
-    } else if (!tabButton && (distance > 20)) {
+    } else if (!self.tabButton && (distance > 20)) {
         CGFloat angle = atan2(xdiff, ydiff);
 
         if (angle >= 0 && angle < M_PI_2) {
@@ -242,14 +223,14 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (selectedLabel != nil) {
-        if (tabButton) {
-            [delegate insertText:@"    "];
-        } else if (!trackPoint) {
-            NSString *textToInsert = selectedLabel.text;
-            [delegate insertText:textToInsert];
-        } else if (trackPoint && selecting) {
-            [delegate selectionComplete];
+    if (self.selectedLabel != nil) {
+        if (self.tabButton) {
+            [self.delegate insertText:self.tabString];
+        } else if (!self.trackPoint) {
+            NSString *textToInsert = self.selectedLabel.text;
+            [self.delegate insertText:textToInsert];
+        } else if (self.trackPoint && self.selecting) {
+            [self.delegate selectionComplete];
         }
     }
 

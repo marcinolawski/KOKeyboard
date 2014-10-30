@@ -37,6 +37,9 @@
 @interface KOKeyboardRow : UIInputView <UIInputViewAudioFeedback>
 
 + (KOKeyboardRow *)applyToTextView:(UITextView *)textView;
+- (void) setTabInsertString: (NSString*)string;
+
+@property NSMutableArray *buttons;
 
 - (void)trackPointMovedX:(int)xdiff Y:(int)ydiff selecting:(BOOL)selecting;
 
