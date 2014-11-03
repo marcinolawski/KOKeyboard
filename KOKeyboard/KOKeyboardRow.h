@@ -35,12 +35,20 @@
 #import <UIKit/UIKit.h>
 #import "KOKeyboardConfig.h"
 
+@protocol KOKeyboardListener
+
+- (BOOL) willKeyboardInsert: (NSString*)text;
+- (void) didKeyboardInsert: (NSString*)text;
+
+@end
+
 @interface KOKeyboardRow : UIInputView <UIInputViewAudioFeedback>
 
 + (KOKeyboardRow *)applyToTextView:(UITextView *)textView withConfig:(id<KOKeyboardConfig>)config;
 - (void) setTabInsertString: (NSString*)string;
 
 @property NSMutableArray *buttons;
+@property (weak) id<KOKeyboardListener> listener;
 
 - (void)trackPointMovedX:(int)xdiff Y:(int)ydiff selecting:(BOOL)selecting;
 

@@ -86,7 +86,16 @@
 }
 
 - (void)insertText:(NSString *)text {
+    
+    if (self.listener != nil) {
+        if (![self.listener willKeyboardInsert:text])
+            return;
+    }
+    
     [textView insertText:text];
+    
+    if (self.listener != nil)
+        [self.listener didKeyboardInsert:text];
 }
 
 - (void)trackPointStarted {

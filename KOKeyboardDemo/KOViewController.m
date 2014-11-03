@@ -33,7 +33,6 @@
 //
 
 #import "KOViewController.h"
-#import "KOKeyboardRow.h"
 
 @interface KOViewController ()
 
@@ -43,6 +42,15 @@
 
 - (BOOL) isIpad {
     return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+}
+
+- (BOOL) willKeyboardInsert: (NSString*)text {
+    NSLog(@"will insert \"%@\"", text);
+    return YES;
+}
+
+- (void) didKeyboardInsert: (NSString*)text {
+    NSLog(@"did insert \"%@\"", text);
 }
 
 - (void)viewDidLoad
@@ -55,7 +63,8 @@
 	[self.view addSubview:textView];
     
     id<KOKeyboardConfig> config = ([self isIpad] ? [[KOKeyboardConfigIpad alloc] init] : [[KOKeyboardConfigIphone alloc] init]);
-	[KOKeyboardRow applyToTextView:textView withConfig:config];
+	KOKeyboardRow *row = [KOKeyboardRow applyToTextView:textView withConfig:config];
+    row.listener = self;
 	[textView becomeFirstResponder];
 }
 

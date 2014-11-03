@@ -33,7 +33,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KOKeyboardRow.h"
 
-@interface KOViewController : UIViewController
+@interface KOViewController : UIViewController <KOKeyboardListener>
 
 @end
