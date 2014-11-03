@@ -55,29 +55,25 @@
     }
 }
 
-+ (KOKeyboardRow *)applyToTextView:(UITextView *)t {
-    int barHeight = 72;
-    int barWidth = 768;
++ (KOKeyboardRow *)applyToTextView:(UITextView *)t withConfig:(id<KOKeyboardConfig>)config {
 
-    KOKeyboardRow *v = [[KOKeyboardRow alloc] initWithFrame:CGRectMake(0, 0, barWidth, barHeight) inputViewStyle:UIInputViewStyleKeyboard];
+    KOKeyboardRow *v = [[KOKeyboardRow alloc] initWithFrame:CGRectMake(0, 0, [config barWidth], [config barHeight]) inputViewStyle:UIInputViewStyleKeyboard];
     [v setBackgroundColor:[UIColor clearColor]];
     v.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     v.textView = t;
+    
+    int leftMargin = ([config barWidth] - [config buttonWidth] * [config buttonCount] - [config buttonSpacing] * ([config buttonCount] - 1)) / 2;
 
-    int buttonHeight = 60;
-    int leftMargin = 7;
-    int topMargin = 1;
-    int buttonSpacing = 13;
-    int buttonCount = 11;
-    int buttonWidth = 57;
-    leftMargin = (barWidth - buttonWidth * buttonCount - buttonSpacing * (buttonCount - 1)) / 2;
-
-    NSString *keys = @"TTTTT()\"[]{}'<>\\/$´`~^|€£◉◉◉◉◉-+=%*!?#@&_:;,.1203467589";
     v.buttons = [[NSMutableArray alloc] init];
 
-    for (int i = 0; i < buttonCount; i++) {
-        KOSwipeButton *b = [[KOSwipeButton alloc] initWithFrame:CGRectMake(leftMargin + i * (buttonSpacing + buttonWidth), topMargin + (barHeight - buttonHeight) / 2, buttonWidth, buttonHeight)];
-        b.keys = [keys substringWithRange:NSMakeRange(i * 5, 5)];
+    for (int i = 0; i < [config buttonCount]; i++) {
+        CGRect frame = CGRectMake(
+                                  leftMargin + i * ([config buttonSpacing] + [config buttonWidth]),
+                                  [config topMargin] + ([config barHeight] - [config buttonHeight]) / 2,
+                                  [config buttonWidth],
+                                  [config buttonHeight]);
+        KOSwipeButton *b = [[KOSwipeButton alloc] initWithFrame:frame andConfig:config];
+        b.keys = [config buttonKeys:i];
         b.delegate = v;
         b.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         [v addSubview:b];

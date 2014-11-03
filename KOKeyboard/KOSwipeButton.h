@@ -33,8 +33,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KOKeyboardConfig.h"
 
 @interface KOSwipeButton : UIButton
+
+- (id)initWithFrame:(CGRect)frame andConfig: (id<KOKeyboardConfig>)config;
 
 @property(nonatomic, weak) id delegate;
 @property(nonatomic, retain) NSMutableArray *labels;

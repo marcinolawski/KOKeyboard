@@ -45,7 +45,7 @@
     [super setFrame:frame];
 }
 
-- (id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame andConfig: (id<KOKeyboardConfig>)config {
     self = [super initWithFrame:frame];
 
     self.bgView = [[UIImageView alloc] initWithFrame:self.bounds];
@@ -56,20 +56,18 @@
     [self.layer setMasksToBounds:YES];
     [self addSubview:self.bgView];
 
-
-    int labelWidth = 20;
-    int labelHeight = 20;
-    int leftInset = 9;
-    int rightInset = 9;
-    int topInset = 3;
-    int bottomInset = 8;
-
     self.labels = [[NSMutableArray alloc] init];
     self.tabString = @"    ";
 
     UIFont *f = [UIFont systemFontOfSize:15];
 
-    UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(leftInset, topInset, labelWidth, labelHeight)];
+    // 1
+    int right1 = [config leftInset] + [config labelWidth];
+    UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(
+                                                           [config leftInset],
+                                                           [config topInset],
+                                                           [config labelWidth],
+                                                           [config labelHeight])];
     l.textAlignment = UITextAlignmentLeft;
     l.text = @"1";
     l.font = f;
@@ -78,7 +76,13 @@
     l.backgroundColor = [UIColor clearColor];
     [self.labels addObject:l];
 
-    l = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - labelWidth - rightInset, topInset, labelWidth, labelHeight)];
+    // 2
+    int left2 = self.frame.size.width - [config labelWidth] - [config rightInset];
+    l = [[UILabel alloc] initWithFrame:CGRectMake(
+                                                  self.frame.size.width - [config labelWidth] - [config rightInset],
+                                                  [config topInset],
+                                                  [config labelWidth],
+                                                  [config labelHeight])];
     l.textAlignment = UITextAlignmentRight;
     l.text = @"2";
     l.font = f;
@@ -88,7 +92,13 @@
     l.backgroundColor = [UIColor clearColor];
     [self.labels addObject:l];
 
-    l = [[UILabel alloc] initWithFrame:CGRectIntegral(CGRectMake((self.frame.size.width - labelWidth - leftInset - rightInset) / 2 + leftInset, (self.frame.size.height - labelHeight - topInset - bottomInset) / 2 + topInset, labelWidth, labelHeight))];
+    // 3
+    CGRect rect = CGRectMake(
+                                right1,
+                                (self.frame.size.height - [config labelHeight] - [config topInset] - [config bottomInset]) / 2 + [config topInset],
+                                left2 - right1,
+                                [config labelHeight]);
+    l = [[UILabel alloc] initWithFrame:rect];
     l.textAlignment = UITextAlignmentCenter;
     l.text = @"3";
     l.font = f;
@@ -98,7 +108,8 @@
     l.backgroundColor = [UIColor clearColor];
     [self.labels addObject:l];
 
-    l = [[UILabel alloc] initWithFrame:CGRectMake(leftInset, (self.frame.size.height - labelHeight - bottomInset), labelWidth, labelHeight)];
+    // 4
+    l = [[UILabel alloc] initWithFrame:CGRectMake([config leftInset], (self.frame.size.height - [config labelHeight] - [config bottomInset]), [config labelWidth], [config labelHeight])];
     l.textAlignment = UITextAlignmentLeft;
     l.text = @"4";
     l.font = f;
@@ -107,7 +118,8 @@
     l.backgroundColor = [UIColor clearColor];
     [self.labels addObject:l];
 
-    l = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - labelWidth - rightInset, (self.frame.size.height - labelHeight - bottomInset), labelWidth, labelHeight)];
+    // 5
+    l = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - [config labelWidth] - [config rightInset], (self.frame.size.height - [config labelHeight] - [config bottomInset]), [config labelWidth], [config labelHeight])];
     l.textAlignment = UITextAlignmentRight;
     l.text = @"5";
     l.font = f;

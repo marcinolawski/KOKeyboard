@@ -33,10 +33,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KOKeyboardConfig.h"
 
 @interface KOKeyboardRow : UIInputView <UIInputViewAudioFeedback>
 
-+ (KOKeyboardRow *)applyToTextView:(UITextView *)textView;
++ (KOKeyboardRow *)applyToTextView:(UITextView *)textView withConfig:(id<KOKeyboardConfig>)config;
 - (void) setTabInsertString: (NSString*)string;
 
 @property NSMutableArray *buttons;
