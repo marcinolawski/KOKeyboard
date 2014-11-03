@@ -28,7 +28,8 @@ Then when you have a UITextView, simply call the static method `[KOKeyboardRow a
 	UITextView *textView = [[UITextView alloc] initWithFrame:self.view.bounds];
 	textView.text = @"some text...";
 	[self.view addSubview:textView];
-	[KOKeyboardRow applyToTextView:textView];
+	id<KOKeyboardConfig> config = ([self isIpad] ? [[KOKeyboardConfigIpad alloc] init] : [[KOKeyboardConfigIphone alloc] init]);
+	[KOKeyboardRow applyToTextView:textView withConfig:config];
 
 You will see the additional keyboard after the UITextView gets focus, if you want to do that programmatically, just do this:
 
