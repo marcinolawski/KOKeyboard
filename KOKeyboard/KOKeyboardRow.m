@@ -86,7 +86,6 @@
 }
 
 - (void)insertText:(NSString *)text {
-    
     if (self.listener != nil) {
         if (![self.listener willKeyboardInsert:text])
             return;
@@ -96,6 +95,10 @@
     
     if (self.listener != nil)
         [self.listener didKeyboardInsert:text];
+}
+
+- (void) dismissKeyboard {
+    [textView resignFirstResponder];
 }
 
 - (void)trackPointStarted {

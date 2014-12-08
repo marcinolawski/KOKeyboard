@@ -47,6 +47,7 @@
 @property(nonatomic, retain) UIImageView *foregroundView;
 @property(nonatomic, assign) BOOL trackPoint;
 @property(nonatomic, assign) BOOL tabButton;
+@property(nonatomic, assign) BOOL dismissButton;
 @property(nonatomic, retain) NSDate *firstTapDate;
 @property(nonatomic, assign) BOOL selecting;
 @property(nonatomic, retain) UIImage *blueImage;

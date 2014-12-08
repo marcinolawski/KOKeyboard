@@ -89,7 +89,7 @@
 
 - (instancetype) init {
     if (self = [super init]) {
-        _keys = @"()\"[]{}'<>◉◉◉◉◉*&#@=_:;,.";
+        _keys = @"()\"[]{}'<>◉◉◉◉◉*&#@=_:;,.DDDDD";
     }
     return self;
 }
@@ -121,12 +121,11 @@
 }
 
 - (int) buttonCount {
-    return 5;
+    return 6;
 }
 
 - (int) buttonWidth {
-    return 116;
-}
+    return 94;}
 
 - (NSString*) buttonKeys: (int)buttonIndex {
     return [_keys substringWithRange:NSMakeRange(buttonIndex * 5, 5)];

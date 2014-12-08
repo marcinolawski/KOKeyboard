@@ -140,10 +140,12 @@
         [[self.labels objectAtIndex:i] setAdjustsFontSizeToFitWidth:YES];
 
         if ([[newKeys substringToIndex:1] isEqualToString:@"◉"] |
-                [[newKeys substringToIndex:1] isEqualToString:@"T"]) {
+            [[newKeys substringToIndex:1] isEqualToString:@"T"] |
+            [[newKeys substringToIndex:1] isEqualToString:@"D"]) {
 
             self.trackPoint = [[newKeys substringToIndex:1] isEqualToString:@"◉"];
             self.tabButton = [[newKeys substringToIndex:1] isEqualToString:@"T"];
+            self.dismissButton = [[newKeys substringToIndex:1] isEqualToString:@"D"];
 
             if (i != 2)
                 [[self.labels objectAtIndex:i] setHidden:YES];
@@ -153,12 +155,13 @@
                     self.blueImage = [UIImage imageWithUIColor:[UIColor colorFromHexString:@"#336ccc"]];
                     self.pressedImage = [UIImage imageWithUIColor:[UIColor colorFromHexString:@"#CCCCCC"]];
                     [[self.labels objectAtIndex:i] setText:@"◉"];
-                    [[self.labels objectAtIndex:i] setFrame:self.bounds];
-
+                    
+                } else if (self.dismissButton) {
+                    [[self.labels objectAtIndex:i] setText:@"↧"];
                 } else {
                     [[self.labels objectAtIndex:i] setText:@"→"];
-                    [[self.labels objectAtIndex:i] setFrame:self.bounds];
                 }
+                [[self.labels objectAtIndex:i] setFrame:self.bounds];
             }
         }
     }
@@ -237,7 +240,10 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if (self.selectedLabel != nil) {
         if (self.tabButton) {
+            // tab
             [self.delegate insertText:self.tabString];
+        } else if (self.dismissButton) {
+            [self.delegate dismissKeyboard];
         } else if (!self.trackPoint) {
             NSString *textToInsert = self.selectedLabel.text;
             [self.delegate insertText:textToInsert];
