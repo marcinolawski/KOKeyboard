@@ -45,8 +45,20 @@
     [super setFrame:frame];
 }
 
+- (void) setTextColor:(UIColor *)textColor {
+    for (UILabel *eachLabel in self.labels)
+        eachLabel.textColor = textColor;
+}
+
+- (void) setHlTextColor:(UIColor *)textColor {
+    for (UILabel *eachLabel in self.labels)
+        eachLabel.highlightedTextColor = textColor;
+}
+
 - (id)initWithFrame:(CGRect)frame andConfig: (id<KOKeyboardConfig>)config {
     self = [super initWithFrame:frame];
+    
+    _labels = [[NSMutableArray alloc] init];
 
     self.bgView = [[UIImageView alloc] initWithFrame:self.bounds];
     [self.bgView setImage:[UIImage imageWithUIColor:[UIColor whiteColor]]];

@@ -35,6 +35,9 @@
 #import "KOKeyboardRow.h"
 #import "KOSwipeButton.h"
 
+#import "UIImageExtensions.h"
+#import "UIColorExtensions.h"
+
 @interface KOKeyboardRow ()
 
 @property(nonatomic, retain) UITextView *textView;
@@ -83,6 +86,34 @@
     t.inputAccessoryView = v;
 
     return v;
+}
+
+- (void) setKeyboardAppearance: (UIKeyboardAppearance)appearance {
+    for (KOSwipeButton *eachButton in _buttons) {
+        
+        UIColor *buttonColor = (appearance == UIKeyboardAppearanceDefault ||
+                                appearance == UIKeyboardAppearanceLight
+                                    ? [UIColor whiteColor]
+                                    : [UIColor colorFromHexString:@"#8a8a8a"]);
+        
+        [eachButton.bgView setImage:[UIImage imageWithUIColor:buttonColor]];
+        [eachButton.bgView setHighlightedImage:[UIImage imageWithUIColor:[UIColor colorFromHexString:@"#CCCCCC"]]];
+        
+        // text color
+        UIColor *textColor = (appearance == UIKeyboardAppearanceDefault ||
+                              appearance == UIKeyboardAppearanceLight
+                              ? [UIColor blackColor]
+                              : [UIColor whiteColor]);
+        [eachButton setTextColor:textColor];
+        
+        // highlighted text color
+        UIColor *hlTextColor = (appearance == UIKeyboardAppearanceDefault ||
+                              appearance == UIKeyboardAppearanceLight
+                              ? [UIColor whiteColor]
+                              : [UIColor blackColor]);
+        [eachButton setHlTextColor:hlTextColor];
+        
+    }
 }
 
 - (void)insertText:(NSString *)text {

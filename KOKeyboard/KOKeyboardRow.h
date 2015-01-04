@@ -50,6 +50,8 @@
 @property NSMutableArray *buttons;
 @property (weak) id<KOKeyboardListener> listener;
 
+- (void) setKeyboardAppearance: (UIKeyboardAppearance)appearance;
+
 - (void)trackPointMovedX:(int)xdiff Y:(int)ydiff selecting:(BOOL)selecting;
 
 - (void)trackPointStarted;
