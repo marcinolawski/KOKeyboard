@@ -170,11 +170,7 @@
                     
                 } else if (self.dismissButton) {
                     [[self.labels objectAtIndex:i] setText:nil];
-                    UIImage *image = [UIImage imageNamed:@"dismiss.png"];
-                    [self.bgView setImage:image];
-//                    [self setImage: image forState:UIControlStateHighlighted];
-//                    [self setImage: image forState:UIControlStateSelected];
-//                    [self.bgView setBackgroundColor:[UIColor colorFromHexString:@"#adb5be"]];
+                    // nothing (set in KOKeyboardConfig)
                 } else {
                     [[self.labels objectAtIndex:i] setText:@"→"];
                 }

@@ -96,8 +96,17 @@
                                     ? [UIColor whiteColor]
                                     : [UIColor colorFromHexString:@"#8a8a8a"]);
         if (!eachButton.dismissButton) {
+            // not dismiss button
             [eachButton.bgView setImage:[UIImage imageWithUIColor:buttonColor]];
             [eachButton.bgView setHighlightedImage:[UIImage imageWithUIColor:[UIColor colorFromHexString:@"#CCCCCC"]]];
+        } else {
+            // dismiss button
+            UIImage *image =
+                (appearance == UIKeyboardAppearanceDefault ||
+                 appearance == UIKeyboardAppearanceLight
+                 ? [UIImage imageNamed:@"dismiss_light.png"]
+                 : [UIImage imageNamed:@"dismiss_dark.png"]);
+            [eachButton.bgView setImage:image];
         }
         
         // text color
