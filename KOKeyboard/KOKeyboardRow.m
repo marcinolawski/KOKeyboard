@@ -95,9 +95,10 @@
                                 appearance == UIKeyboardAppearanceLight
                                     ? [UIColor whiteColor]
                                     : [UIColor colorFromHexString:@"#8a8a8a"]);
-        
-        [eachButton.bgView setImage:[UIImage imageWithUIColor:buttonColor]];
-        [eachButton.bgView setHighlightedImage:[UIImage imageWithUIColor:[UIColor colorFromHexString:@"#CCCCCC"]]];
+        if (!eachButton.dismissButton) {
+            [eachButton.bgView setImage:[UIImage imageWithUIColor:buttonColor]];
+            [eachButton.bgView setHighlightedImage:[UIImage imageWithUIColor:[UIColor colorFromHexString:@"#CCCCCC"]]];
+        }
         
         // text color
         UIColor *textColor = (appearance == UIKeyboardAppearanceDefault ||
