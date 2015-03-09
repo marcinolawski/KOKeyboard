@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'KOKeyboard/*.{h,m}'
-  s.ios.resource_bundle = { 'KOKeyboard' => '*.png' }
+  s.ios.resource_bundle = { 'KOKeyboard' => 'KOKeyboard/*.png' }
   s.exclude_files = 'KOKeyboardDemo/*'
   s.frameworks = 'Foundation', 'CoreGraphics'
   s.libraries = 'System'
