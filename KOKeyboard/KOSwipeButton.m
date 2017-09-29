@@ -69,7 +69,7 @@
     [self addSubview:self.bgView];
 
     self.labels = [[NSMutableArray alloc] init];
-    self.tabString = @"    ";
+    self.tabString = @"  ";
 
     UIFont *f = [UIFont systemFontOfSize:15];
 
